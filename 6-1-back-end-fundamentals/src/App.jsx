@@ -70,7 +70,7 @@ You will write code in:
 
 This App.jsx file gives you:
 - lab instructions
-- TODO list
+- Task list
 - coding hints
 - route testing reminders
 
@@ -82,10 +82,10 @@ Open these files:
    backend/server.js
    src/App.jsx
 
-Then complete the TODOs there.
+Then complete the Tasks there.
 
 -------------------------------------------------------------------
-TODO 1:
+Task 1:
 Import Express
 -------------------------------------------------------------------
 
@@ -99,7 +99,7 @@ Syntax hint:
    import ______ from 'express';
 
 -------------------------------------------------------------------
-TODO 2:
+Task 2:
 Create the Express app
 -------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ Syntax hint:
    const app = ______();
 
 -------------------------------------------------------------------
-TODO 3:
+Task 3:
 Allow React to access the server
 -------------------------------------------------------------------
 
@@ -129,7 +129,7 @@ In server.js,
 //    app.use(______);
 
 -------------------------------------------------------------------
-TODO 4:
+Task 4:
 Start the server
 -------------------------------------------------------------------
 
@@ -148,7 +148,7 @@ Syntax hint:
    });
 
 -------------------------------------------------------------------
-TODO 5:
+Task 5:
 Create the home route "/"
 -------------------------------------------------------------------
 
@@ -169,7 +169,7 @@ Syntax hint:
    });
 
 -------------------------------------------------------------------
-TODO 6:
+Task 6:
 Create the "/about" route
 -------------------------------------------------------------------
 
@@ -189,7 +189,7 @@ Syntax hint:
    });
 
 -------------------------------------------------------------------
-TODO 7:
+Task 7:
 Create the "/student" route
 -------------------------------------------------------------------
 
@@ -215,7 +215,7 @@ Syntax hint:
    });
 
 -------------------------------------------------------------------
-TODO 8:
+Task 8:
 request/response between React and server
 -------------------------------------------------------------------
 
@@ -240,7 +240,7 @@ Syntax hint:
      });
 
 -------------------------------------------------------------------
-TODO 9:
+Task 9:
 Make React use the student data
 -------------------------------------------------------------------
 
@@ -275,7 +275,7 @@ and in JSX:
 HOW TO TEST
 ===================================================================
 
-After completing the TODOs:
+After completing the Tasks:
 
 1. Start the back-end:
       node server.js
@@ -356,12 +356,13 @@ import { useEffect, useState } from 'react';
 import './index.css';
 
 export default function App() {
-  // TODO 9:
+  // Task 9:
   // Create state to store student data
   // Syntax hint:
   // const [student, setStudent] = useState(____);
+   const [student, setStudent] = useState(null);
 
-  // TODO 8:
+  // Task 8:
   // Request student data from the server when the page loads
   // Syntax hint:
   // fetch('http://localhost:3000/student')
@@ -369,6 +370,16 @@ export default function App() {
   //   .then((data) => {
   //     setStudent(data);
   //   });
+   useEffect(() => {
+      fetch('http://localhost:3000/student')
+         .then((res) => res.json())
+         .then((data) => {
+            setStudent(data);
+         })
+         .catch(() => {
+            setStudent(null);
+         });
+   }, []);
 
   return (
     <main className="app-shell">
